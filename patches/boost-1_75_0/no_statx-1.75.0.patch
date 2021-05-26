@@ -1,0 +1,16 @@
+diff -ru boost_1_75_0.orig/libs/filesystem/src/operations.cpp boost_1_75_0/libs/filesystem/src/operations.cpp
+--- boost_1_75_0.orig/libs/filesystem/src/operations.cpp	2020-12-02 21:01:22.000000000 -0800
++++ boost_1_75_0/libs/filesystem/src/operations.cpp	2021-05-26 15:48:10.000000000 -0700
+@@ -40,6 +40,12 @@
+ # include <iostream>
+ #endif
+ 
++// hack, support Android kernels < 4.11
++#if defined(__ANDROID__)
++# undef BOOST_FILESYSTEM_HAS_STATX
++# undef BOOST_FILESYSTEM_HAS_STATX_SYSCALL
++#endif
++
+ # ifdef BOOST_POSIX_API
+ 
+ #   include <sys/types.h>
